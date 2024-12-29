@@ -1,0 +1,40 @@
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.form-card {
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.success-card {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    margin: 20px 0;
+    background-color: #e8f5e9;
+}
+
+.error-card {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    margin: 20px 0;
+    background-color: #ffebee;
+}
+
+.mat-icon {
+    margin-right: 8px;
+}
+
+.form-field {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.submit-btn {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+}

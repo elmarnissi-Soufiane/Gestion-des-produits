@@ -1,0 +1,20 @@
+<div class="p-4">
+  <app-nav-bar-prod></app-nav-bar-prod>
+  <ng-container
+    *ngIf="ProductStateReducersServices$ | async as state"
+    [ngSwitch]="state.etatProductStateEnum"
+  >
+    <ng-container *ngSwitchCase="etatProductStateEnum.INITIAL">
+      <div class="p-2">Initial State</div>
+    </ng-container>
+    <ng-container *ngSwitchCase="etatProductStateEnum.LAODING">
+      <div class="p-2">Loading...</div>
+    </ng-container>
+    <ng-container *ngSwitchCase="etatProductStateEnum.ERROR">
+      <div class="p-2 text-danger">{{ state.errorMessage }}</div>
+    </ng-container>
+    <ng-container *ngSwitchCase="etatProductStateEnum.LAODED" class="p-4">
+      <app-list-prod [state]="state"></app-list-prod>
+    </ng-container>
+  </ng-container>
+</div>

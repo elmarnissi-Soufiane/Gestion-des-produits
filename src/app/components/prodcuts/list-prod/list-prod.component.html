@@ -1,0 +1,86 @@
+<div *ngIf="state?.products?.length; else noData" class="container mt-5">
+  <div class="table-responsive">
+    <table class="table table-hover table-bordered">
+      <thead class="table-primary">
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Selected</th>
+          <th>Available</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let product of state?.products"
+          [class.table-active]="product.selected"
+        >
+          <td>{{ product.id }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.quantity }}</td>
+          <td>
+            <span
+              class="badge"
+              [ngClass]="{
+                'badge-success': product.selected,
+                'badge-danger': !product.selected
+              }"
+            >
+              {{ product.selected ? "True " : "False " }}
+            </span>
+          </td>
+          <td>
+            <span
+              class="badge"
+              [ngClass]="{
+                'badge-success': product.available,
+                'badge-warning': !product.available
+              }"
+            >
+              {{ product.available ? "True " : "False " }}
+            </span>
+          </td>
+          <td>
+            <div class="btn-group" role="group">
+              <button
+                class="btn btn-sm btn-outline-primary"
+                (click)="onSelectProduct(product)"
+                title="Toggle selected"
+              >
+                <i class="fas fa-check-circle"></i>
+              </button>
+              <button
+                class="btn btn-sm btn-outline-success"
+                (click)="onAvaliableProduct(product)"
+                title="Toggle available"
+              >
+                <i class="fas fa-truck"></i>
+              </button>
+              <button
+                class="btn btn-sm btn-outline-danger"
+                (click)="onDeleteProduct(product)"
+                title="Delete"
+              >
+                <i class="fas fa-trash"></i>
+              </button>
+              <button
+                class="btn btn-sm btn-outline-warning"
+                (click)="onUpdateProduct(product)"
+                title="Update"
+              >
+                <i class="fas fa-edit"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #noData>
+  <p class="text-center text-muted mt-4">No products available.</p>
+</ng-template>

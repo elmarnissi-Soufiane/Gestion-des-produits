@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+  <div class="container-fluid">
+    <!-- Navigation Links -->
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link custom-link" (click)="onGetAllProducts()">
+          <i class="fas fa-boxes"></i> All
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link custom-link" (click)="onGetAllProductsSelected()">
+          <i class="fas fa-check-circle"></i> Selected
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link custom-link" (click)="onGetAllProductsAvailable()">
+          <i class="fas fa-truck"></i> Available
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link custom-link" (click)="onNewProduct()">
+          <i class="fas fa-plus"></i> New
+        </a>
+      </li>
+    </ul>
+
+    <!-- Search Form -->
+    <form
+      #formSearch="ngForm"
+      (ngSubmit)="onSearch(formSearch.value)"
+      class="d-flex search-form"
+    >
+      <input
+        ngModel
+        name="keyword"
+        class="form-control me-2 search-input"
+        type="search"
+        placeholder="Search for products..."
+        aria-label="Search"
+      />
+      <button type="submit" class="btn btn-outline-success search-button">
+        <i class="fas fa-search"></i>
+      </button>
+    </form>
+  </div>
+</nav>

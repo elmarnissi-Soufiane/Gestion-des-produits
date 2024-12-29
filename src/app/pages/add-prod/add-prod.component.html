@@ -1,0 +1,73 @@
+<div class="container mt-4">
+    <!-- Vérification si le FormGroup est initialisé -->
+    <ng-container *ngIf="productFormGroup">
+        <ng-container *ngIf="state as data">
+            <!-- Affichage pendant le chargement -->
+            <ng-container *ngIf="data.etatProductStateEnum === etatProductStateEnum.LAODING">
+                <mat-progress-spinner mode="indeterminate" diameter="40"></mat-progress-spinner>
+            </ng-container>
+
+            <!-- Affichage après le chargement -->
+            <ng-container *ngIf="data.etatProductStateEnum === etatProductStateEnum.LAODED">
+                <mat-card class="mat-elevation-z4 p-3">
+                    <mat-card-content>
+                        <span>Product Saved Successfully</span>
+                        <button mat-raised-button color="primary" class="ml-3" (click)="newProduct()">
+              New Product
+            </button>
+                    </mat-card-content>
+                </mat-card>
+            </ng-container>
+
+            <!-- Affichage en cas d'erreur -->
+            <ng-container *ngIf="data.etatProductStateEnum === etatProductStateEnum.ERROR">
+                <mat-card class="mat-elevation-z4 p-3">
+                    <mat-card-content>
+                        <span>Error occurred while saving the product.</span>
+                    </mat-card-content>
+                </mat-card>
+            </ng-container>
+        </ng-container>
+    </ng-container>
+</div>
+
+<div class="container mt-4" *ngIf="productFormGroup">
+    <h2 class="text-center mb-4">Add Product</h2>
+    <form [formGroup]="productFormGroup" class="border p-4 rounded mat-elevation-z4">
+        <mat-form-field appearance="fill" class="w-100 mb-3">
+            <mat-label>Product Name</mat-label>
+            <input matInput type="text" formControlName="name" placeholder="Enter product name" />
+            <mat-error *ngIf="submitted && productFormGroup.controls['name'].errors">
+                Name is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-100 mb-3">
+            <mat-label>Price ($)</mat-label>
+            <input matInput type="number" formControlName="price" placeholder="Enter product price" />
+            <mat-error *ngIf="submitted && productFormGroup.controls['price'].errors">
+                Price is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-100 mb-3">
+            <mat-label>Quantity</mat-label>
+            <input matInput type="number" formControlName="quantity" placeholder="Enter product quantity" />
+            <mat-error *ngIf="submitted && productFormGroup.controls['quantity'].errors">
+                Quantity is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-checkbox formControlName="selected" class="mb-3">
+            Selected
+        </mat-checkbox>
+
+        <mat-checkbox formControlName="available" class="mb-3">
+            Available
+        </mat-checkbox>
+
+        <button mat-raised-button color="primary" class="w-100" type="submit" (click)="onSaveProduct()">
+      Submit
+    </button>
+    </form>
+</div>

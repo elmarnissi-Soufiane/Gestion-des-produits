@@ -1,0 +1,44 @@
+/* Table Styling */
+
+.table-hover tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.table-primary th {
+    background-color: #007bff;
+    color: white;
+}
+
+
+/* Badge Styling */
+
+.badge-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.badge-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+
+/* Button Styling */
+
+.btn-outline-primary {
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-outline-danger {
+    transition: all 0.3s ease;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: white;
+}
