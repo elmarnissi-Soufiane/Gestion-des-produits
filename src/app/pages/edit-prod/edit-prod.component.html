@@ -1,123 +1,84 @@
 <div class="container mt-4">
-  <!-- Vérification si le FormGroup est initialisé -->
-  <ng-container *ngIf="productFormGroup">
-    <ng-container *ngIf="state as data">
-      <!-- Affichage pendant le chargement -->
-      <ng-container
-        *ngIf="data.etatProductStateEnum === etatProductStateEnum.LAODING"
-      >
-        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-      </ng-container>
+    <!-- Vérification si le FormGroup est initialisé -->
+    <ng-container *ngIf="productFormGroup">
+        <ng-container *ngIf="state as data">
+            <!-- Affichage pendant le chargement -->
+            <ng-container *ngIf="data.etatProductStateEnum === etatProductStateEnum.LAODING">
+                <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+            </ng-container>
 
-      <!-- Affichage après le chargement -->
-      <ng-container
-        *ngIf="data.etatProductStateEnum === etatProductStateEnum.LAODED"
-      >
-        <ng-container *ngIf="formBuild">
-          <mat-card class="success-card">
-            <mat-icon color="primary">check_circle</mat-icon>
-            <span>Product Updated Successfully</span>
-            <button
-              mat-raised-button
-              color="primary"
-              class="ml-3"
-              (click)="okUpdateProduct()"
-            >
+            <!-- Affichage après le chargement -->
+            <ng-container *ngIf="data.etatProductStateEnum === etatProductStateEnum.LAODED">
+                <ng-container *ngIf="formBuild">
+                    <mat-card class="success-card">
+                        <mat-icon color="primary">check_circle</mat-icon>
+                        <span>Product Updated Successfully</span>
+                        <button mat-raised-button color="primary" class="ml-3" (click)="okUpdateProduct()">
               Products
             </button>
-          </mat-card>
-        </ng-container>
-      </ng-container>
+                    </mat-card>
+                </ng-container>
+            </ng-container>
 
-      <!-- Affichage en cas d'erreur -->
-      <ng-container
-        *ngIf="data.etatProductStateEnum === etatProductStateEnum.ERROR"
-      >
-        <mat-card class="error-card">
-          <mat-icon color="warn">error</mat-icon>
-          <span>{{ data.errorMessage }}</span>
-        </mat-card>
-      </ng-container>
+            <!-- Affichage en cas d'erreur -->
+            <ng-container *ngIf="data.etatProductStateEnum === etatProductStateEnum.ERROR">
+                <mat-card class="error-card">
+                    <mat-icon color="warn">error</mat-icon>
+                    <span>{{ data.errorMessage }}</span>
+                </mat-card>
+            </ng-container>
+        </ng-container>
     </ng-container>
-  </ng-container>
 </div>
 
 <ng-container *ngIf="state as data">
-  <ng-container
-    *ngIf="data.etatProductStateEnum === etatProductStateEnum.LAODED"
-  >
-    <div class="container mt-4" *ngIf="productFormGroup">
-      <h2 class="text-center mb-4">Edit Product</h2>
-      <mat-card class="form-card">
-        <form [formGroup]="productFormGroup">
-          <!-- Champ caché pour l'ID -->
-          <input formControlName="id" type="hidden" />
+    <ng-container *ngIf="data.etatProductStateEnum === etatProductStateEnum.LAODED">
+        <div class="container mt-4" *ngIf="productFormGroup">
+            <h2 class="text-center mb-4">Edit Product</h2>
+            <mat-card class="form-card">
+                <form [formGroup]="productFormGroup">
+                    <!-- Champ caché pour l'ID -->
+                    <input formControlName="id" type="hidden" />
 
-          <!-- Nom du produit -->
-          <mat-form-field appearance="fill" class="form-field">
-            <mat-label>Product Name</mat-label>
-            <input
-              matInput
-              type="text"
-              formControlName="name"
-              placeholder="Enter product name"
-            />
-            <mat-error
-              *ngIf="submitted && productFormGroup.controls['name'].errors"
-            >
-              Name is required
-            </mat-error>
-          </mat-form-field>
+                    <!-- Nom du produit -->
+                    <mat-form-field appearance="fill" class="form-field">
+                        <mat-label>Product Name</mat-label>
+                        <input matInput type="text" formControlName="name" placeholder="Enter product name" />
+                        <mat-error *ngIf="submitted && productFormGroup.controls['name'].errors">
+                            Name is required
+                        </mat-error>
+                    </mat-form-field>
 
-          <!-- Prix -->
-          <mat-form-field appearance="fill" class="form-field">
-            <mat-label>Price ($)</mat-label>
-            <input
-              matInput
-              type="number"
-              formControlName="price"
-              placeholder="Enter product price"
-            />
-            <mat-error
-              *ngIf="submitted && productFormGroup.controls['price'].errors"
-            >
-              Price is required
-            </mat-error>
-          </mat-form-field>
+                    <!-- Prix -->
+                    <mat-form-field appearance="fill" class="form-field">
+                        <mat-label>Price ($)</mat-label>
+                        <input matInput type="number" formControlName="price" placeholder="Enter product price" />
+                        <mat-error *ngIf="submitted && productFormGroup.controls['price'].errors">
+                            Price is required
+                        </mat-error>
+                    </mat-form-field>
 
-          <!-- Quantité -->
-          <mat-form-field appearance="fill" class="form-field">
-            <mat-label>Quantity</mat-label>
-            <input
-              matInput
-              type="number"
-              formControlName="quantity"
-              placeholder="Enter product quantity"
-            />
-            <mat-error
-              *ngIf="submitted && productFormGroup.controls['quantity'].errors"
-            >
-              Quantity is required
-            </mat-error>
-          </mat-form-field>
+                    <!-- Quantité -->
+                    <mat-form-field appearance="fill" class="form-field">
+                        <mat-label>Quantity</mat-label>
+                        <input matInput type="number" formControlName="quantity" placeholder="Enter product quantity" />
+                        <mat-error *ngIf="submitted && productFormGroup.controls['quantity'].errors">
+                            Quantity is required
+                        </mat-error>
+                    </mat-form-field>
 
-          <!-- Selected -->
-          <mat-checkbox formControlName="selected">Selected</mat-checkbox>
+                    <!-- Selected -->
+                    <mat-checkbox formControlName="selected">Selected</mat-checkbox>
 
-          <!-- Available -->
-          <mat-checkbox formControlName="available">Available</mat-checkbox>
+                    <!-- Available -->
+                    <mat-checkbox formControlName="available">Available</mat-checkbox>
 
-          <!-- Bouton de soumission -->
-          <button
-            mat-raised-button
-            color="primary"
-            class="submit-btn"
-            (click)="onUpdateProduct()"
-          >
+                    <!-- Bouton de soumission -->
+                    <button mat-raised-button color="primary" class="submit-btn" (click)="onUpdateProduct()">
             Submit
           </button>
-        </form>
-      </mat-card>
-    </div>
-  </ng-container>
+                </form>
+            </mat-card>
+        </div>
+    </ng-container>
 </ng-container>

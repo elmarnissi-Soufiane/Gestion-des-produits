@@ -63,6 +63,14 @@ export class EditProdComponent implements OnInit {
     this.store.dispatch(new EditProductAction(this.productId));
     this.store.subscribe((state) => {
       this.state = state.catalogueState;
+
+      // Vérifiez l'état de l'action de mise à jour du produit.
+      if (this.state?.etatProductStateEnum === EtatProductStateEnum.UPDATED) {
+        // Si l'état du produit a été mis à jour, activez l'affichage du message.
+        this.formBuild = true;
+      }
+
+      // Chargez les informations du produit si l'état est "loaded".
       if (this.state?.etatProductStateEnum === EtatProductStateEnum.LAODED) {
         if (this.state.currectProductUpdate) {
           this.productFormGroup = this._formBuilder.group({
@@ -76,16 +84,39 @@ export class EditProdComponent implements OnInit {
             selected: [this.state.currectProductUpdate.selected],
             available: [this.state.currectProductUpdate.available],
           });
-          this.formBuild = true;
         }
       }
     });
   }
 
+  // ngOnInit(): void {
+  //   this.store.dispatch(new EditProductAction(this.productId));
+  //   this.store.subscribe((state) => {
+  //     this.state = state.catalogueState;
+  //     if (this.state?.etatProductStateEnum === EtatProductStateEnum.LAODED) {
+  //       if (this.state.currectProductUpdate) {
+  //         this.productFormGroup = this._formBuilder.group({
+  //           id: [this.state.currectProductUpdate.id],
+  //           name: [this.state.currectProductUpdate.name, Validators.required],
+  //           price: [this.state.currectProductUpdate.price, Validators.required],
+  //           quantity: [
+  //             this.state.currectProductUpdate.quantity,
+  //             Validators.required,
+  //           ],
+  //           selected: [this.state.currectProductUpdate.selected],
+  //           available: [this.state.currectProductUpdate.available],
+  //         });
+  //         this.formBuild = true;
+  //       }
+  //     }
+  //   });
+  // }
+
   onUpdateProduct() {
     this.submitted = true;
     if (this.productFormGroup?.invalid) return;
     this.store.dispatch(new UpdateProductAction(this.productFormGroup?.value));
+    this.formBuild = false;
   }
 
   okUpdateProduct() {
