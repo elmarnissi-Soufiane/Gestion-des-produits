@@ -11,7 +11,8 @@ export class ProductserviceService {
 
   // get all products
   getAllProducts(): Observable<Product[]> {
-    let host = 'http://localhost:3000';
+    //let host = 'http://localhost:3000';
+    const host = 'http://localhost:8000/api';
     console.log(host);
     let data = this.http.get<Product[]>(host + '/products');
     console.log('products', data);
@@ -20,32 +21,37 @@ export class ProductserviceService {
 
   // Selected
   getSelectedProducts(): Observable<Product[]> {
-    let host = 'http://localhost:3000';
+    //let host = 'http://localhost:3000';
+    const host = 'http://localhost:8000/api';
     return this.http.get<Product[]>(host + '/products?selected=true');
   }
 
   // Available
   getAvailableProducts(): Observable<Product[]> {
     //let host = environment.host;
-    let host = 'http://localhost:3000';
+    //let host = 'http://localhost:3000';
+    const host = 'http://localhost:8000/api';
     return this.http.get<Product[]>(host + '/products?available=true');
   }
 
   // Search
   searchProduts(keyword: string): Observable<Product[]> {
-    let host = 'http://localhost:3000';
+    //let host = 'http://localhost:3000';
+    const host = 'http://localhost:8000/api';
     return this.http.get<Product[]>(host + '/products?name=' + keyword);
   }
 
   // Ajouter un product
   saveProduct(product: Product): Observable<Product> {
-    let host = 'http://localhost:3000';
+    //let host = 'http://localhost:3000';
+    const host = 'http://localhost:8000/api';
     return this.http.post<Product>(host + '/products', product);
   }
 
   // Delete
   deleteProdcut(product: Product): Observable<void> {
-    const host = 'http://localhost:3000';
+    //const host = 'http://localhost:3000';
+    const host = 'http://localhost:8000/api';
     return this.http.delete<void>(`${host}/products/${product.id}`).pipe(
       catchError((error) => {
         console.error('Error deleting product:', error);
@@ -57,14 +63,16 @@ export class ProductserviceService {
   // get ById Edit
   getProductById(id: number): Observable<Product> {
     console.log('Fetching product with ID:', id); // Ajoutez ceci pour déboguer.
-    const host = 'http://localhost:3000';
+    //const host = 'http://localhost:3000';
+    const host = 'http://localhost:8000/api';
     return this.http.get<Product>(`${host}/products/${id}`);
   }
 
   // Update
   updateProduct(product: Product): Observable<Product> {
     console.log('Updating product:', product); // Ajoutez ceci pour déboguer.
-    const host = 'http://localhost:3000';
+    //const host = 'http://localhost:3000';
+    const host = 'http://localhost:8000/api';
     return this.http.put<Product>(`${host}/products/${product.id}`, product);
   }
 }

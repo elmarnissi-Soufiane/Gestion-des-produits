@@ -22,12 +22,12 @@ export class ListProdComponent implements OnInit {
   ngOnInit(): void {}
 
   onDeleteProduct(product: Product) {
-    // if (!product.id) {
-    //   console.error('Product ID is missing:', product);
-    //   return;
-    // }
+    if (!product.id) {
+      console.error('Product ID is missing:', product);
+      return;
+    }
     console.log('Product ID is no missing:', product);
-    //this.store.dispatch(new DeleteProductAction(product));
+    this.store.dispatch(new DeleteProductAction(product));
   }
 
   onUpdateProduct(product: Product) {
