@@ -13,7 +13,7 @@
       "name": "tarik",
       "price": 153.99,
       "quantity": 55555,
-      "selected": false,
+      "selected": true,
       "available": true
     },
     {
@@ -21,7 +21,7 @@
       "name": "Keyboard",
       "price": 49.99,
       "quantity": 15,
-      "selected": false,
+      "selected": true,
       "available": false
     },
     {
@@ -30,7 +30,7 @@
       "price": 178,
       "quantity": 15,
       "selected": true,
-      "available": false
+      "available": true
     },
     {
       "id": "959d",

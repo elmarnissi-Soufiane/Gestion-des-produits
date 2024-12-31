@@ -5,6 +5,8 @@ import { ProductserviceService } from '../../services/productservice.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap, Observable, of } from 'rxjs';
 import {
+  onAvaliableProductActionError,
+  onAvaliableProductActionSuccess,
   DeleteProductErrorAction,
   DeleteProductSuccesAction,
   EditProductErrorAction,
@@ -13,6 +15,8 @@ import {
   ProdctsActionsTypes,
   SaveProductErrorAction,
   SaveProductSuccesAction,
+  onSelectedProductActionError,
+  onSelectedProductActionSuccess,
   UpdateProductErrorAction,
   UpdateProductSuccesAction,
 } from '../actions/products.actions';
@@ -164,6 +168,36 @@ export class ProdcutsEffects {
         this.productserviceService.updateProduct(action.payload).pipe(
           map((data) => new UpdateProductSuccesAction(data)),
           catchError((error) => of(new UpdateProductErrorAction(error.message)))
+        )
+      )
+    )
+  );
+
+  // OnSelected Change
+  selectedProductEffect: Observable<ProductsActions> = createEffect(() =>
+    this.effectAction.pipe(
+      ofType(ProdctsActionsTypes.SELECTED_PRODUCT),
+      mergeMap((action: ProductsActions) =>
+        this.productserviceService.onSelectProduct(action.payload).pipe(
+          map((data) => new onSelectedProductActionSuccess(data)),
+          catchError((error) =>
+            of(new onSelectedProductActionError(error.message))
+          )
+        )
+      )
+    )
+  );
+
+  // OAvaliabe Change
+  avaliableProductEffect: Observable<ProductsActions> = createEffect(() =>
+    this.effectAction.pipe(
+      ofType(ProdctsActionsTypes.AVAILIABLE_PRODUCT), // Action interceptée.
+      mergeMap((action: ProductsActions) =>
+        this.productserviceService.onAvailableProduct(action.payload).pipe(
+          map((data) => new onAvaliableProductActionSuccess(data)), // Succès.
+          catchError(
+            (error) => of(new onAvaliableProductActionError(error.message)) // Échec.
+          )
         )
       )
     )

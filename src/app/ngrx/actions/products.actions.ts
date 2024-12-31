@@ -20,7 +20,7 @@ export enum ProdctsActionsTypes {
   GET_AVALIABLE_PRODUCTS_SUCCESS = '[Products] Get Available products successfully',
   GET_AVALIABLE_PRODUCTS_FAIL = '[Products] Get Available products Error',
 
-  // Avaliable
+  // Search
   SEARCH_PRODUCTS = '[Product] Serach product',
   SEARCH_PRODUCTS_SUCCESS = '[Products] Search product successfully',
   SEARCH_PRODUCTS_FAIL = '[Products] Search product  Error',
@@ -49,6 +49,16 @@ export enum ProdctsActionsTypes {
   UPDATE_PRODUCT = '[Product] Update  product',
   UPDATE_PRODUCT_SUCCESS = '[Product] Update product successfully',
   UPDATE_PRODUCT_FAIL = '[Product] Update product  Error',
+
+  // OnSelected Change
+  SELECTED_PRODUCT = '[Product] Selected Product',
+  SELECTED_PRODUCT_SUCCESS = '[Products] New Product successfully',
+  SELECTED_PRODUCT_FAIL = '[Products] New Product products Error',
+
+  // OnAvaliable Change
+  AVAILIABLE_PRODUCT = '[Product] Avaliable Product',
+  AVAILIABLE_PRODUCT_SUCCESS = '[Products] Avaliable Selected successfully',
+  AVAILIABLE_PRODUCT_FAIL = '[Products] Avaliable Selected Error',
 }
 
 // Pour l'action on à deux parameters (payload: string | object ... && type de action 'success, error')
@@ -197,6 +207,40 @@ export class UpdateProductErrorAction implements Action {
   constructor(public payload: string) {}
 }
 
+// OnSelected Change
+export class onSelectedProductAction implements Action {
+  type: ProdctsActionsTypes = ProdctsActionsTypes.SELECTED_PRODUCT;
+  constructor(public payload: Product) {}
+}
+
+export class onSelectedProductActionSuccess implements Action {
+  type: ProdctsActionsTypes = ProdctsActionsTypes.SELECTED_PRODUCT_SUCCESS;
+  constructor(public payload: Product) {}
+}
+
+export class onSelectedProductActionError implements Action {
+  type: ProdctsActionsTypes = ProdctsActionsTypes.SELECTED_PRODUCT_FAIL;
+  constructor(public payload: string) {}
+}
+
+// OnAvaliable Change
+export class onAvaliableProductAction implements Action {
+  type: ProdctsActionsTypes = ProdctsActionsTypes.AVAILIABLE_PRODUCT;
+  constructor(public payload: Product) {}
+}
+
+export class onAvaliableProductActionSuccess implements Action {
+  type: ProdctsActionsTypes = ProdctsActionsTypes.AVAILIABLE_PRODUCT_SUCCESS;
+  constructor(public payload: Product) {}
+}
+
+export class onAvaliableProductActionError implements Action {
+  type: ProdctsActionsTypes = ProdctsActionsTypes.AVAILIABLE_PRODUCT_FAIL;
+  constructor(public payload: string) {}
+}
+
+// ------------------------------------- //
+
 export type ProductsActions =
   | GetAllProductsAction
   | GetAllProductsSuccesAction
@@ -232,4 +276,12 @@ export type ProductsActions =
   // Update
   | UpdateProductAction
   | UpdateProductSuccesAction
-  | UpdateProductErrorAction;
+  | UpdateProductErrorAction
+  // OnSelected Change
+  | onSelectedProductAction
+  | onSelectedProductActionSuccess
+  | onSelectedProductActionError
+  // OnAvaliable Change
+  | onAvaliableProductAction
+  | onAvaliableProductActionSuccess
+  | onAvaliableProductActionError;

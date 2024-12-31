@@ -3,7 +3,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ProductStateReducersServices } from '../../../ngrx/reducers/products.reducers';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { DeleteProductAction } from '../../../ngrx/actions/products.actions';
+import {
+  DeleteProductAction,
+  onAvaliableProductAction,
+  onSelectedProductAction,
+} from '../../../ngrx/actions/products.actions';
 import { Product } from '../../../models/prodcuts';
 
 @Component({
@@ -35,10 +39,12 @@ export class ListProdComponent implements OnInit {
   }
 
   onAvaliableProduct(product: Product) {
-    //this.store.dispatch(new AvaliableSelectedProductAction(product));
+    console.log('avaliable');
+    this.store.dispatch(new onAvaliableProductAction(product));
   }
 
   onSelectProduct(product: Product) {
-    //this.store.dispatch(new SelectedProductAction(product));
+    this.store.dispatch(new onSelectedProductAction(product));
+    console.log('Selected');
   }
 }

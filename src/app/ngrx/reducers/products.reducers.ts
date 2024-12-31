@@ -236,6 +236,56 @@ export function productReducers(
         errorMessage: (<ProductsActions>action).payload,
       };
 
+    // OnSelected Change
+    case ProdctsActionsTypes.SELECTED_PRODUCT:
+      return {
+        ...state,
+        etatProductStateEnum: EtatProductStateEnum.LAODING, // Indique le chargement.
+      };
+
+    case ProdctsActionsTypes.SELECTED_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        etatProductStateEnum: EtatProductStateEnum.LAODED, // Indique que l'action a réussi.
+        products: state.products.map((product) =>
+          product.id === (<ProductsActions>action).payload.id
+            ? (<ProductsActions>action).payload // Met à jour le produit sélectionné.
+            : product
+        ),
+      };
+
+    case ProdctsActionsTypes.SELECTED_PRODUCT_FAIL:
+      return {
+        ...state,
+        etatProductStateEnum: EtatProductStateEnum.ERROR, // Indique une erreur.
+        errorMessage: (<ProductsActions>action).payload, // Ajoute un message d'erreur.
+      };
+
+    // OnAvaliable Change
+    case ProdctsActionsTypes.AVAILIABLE_PRODUCT:
+      return {
+        ...state,
+        etatProductStateEnum: EtatProductStateEnum.LAODING,
+      };
+
+    case ProdctsActionsTypes.AVAILIABLE_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        etatProductStateEnum: EtatProductStateEnum.LAODED, // Indique que l'action a réussi.
+        products: state.products.map((product) =>
+          product.id === (<ProductsActions>action).payload.id
+            ? (<ProductsActions>action).payload // Met à jour le produit disponible.
+            : product
+        ),
+      };
+
+    case ProdctsActionsTypes.AVAILIABLE_PRODUCT_FAIL:
+      return {
+        ...state,
+        etatProductStateEnum: EtatProductStateEnum.ERROR, // Indique une erreur.
+        errorMessage: (<ProductsActions>action).payload, // Ajoute un message d'erreur.
+      };
+
     default:
       return { ...state };
   }
