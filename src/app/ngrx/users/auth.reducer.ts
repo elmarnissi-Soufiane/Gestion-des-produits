@@ -6,7 +6,7 @@ export interface AuthState {
   error: string | null;
   isAuthenticated: boolean;
   loading: boolean;
-  user: any | null;  // Ajoutez l'utilisateur
+  user: any | null;
 }
 
 export const initialState: AuthState = {
@@ -14,7 +14,7 @@ export const initialState: AuthState = {
   error: null,
   isAuthenticated: false,
   loading: false,
-  user: null,  // Initialisez l'utilisateur à null
+  user: null,
 };
 
 export const authReducer = createReducer(
@@ -30,7 +30,7 @@ export const authReducer = createReducer(
     isAuthenticated: true,
     loading: false,
     error: null,
-    user,  // Stockez l'utilisateur dans l'état
+    user,
   })),
   on(AuthActions.loginFailure, (state, { error }) => ({
     ...state,
@@ -38,7 +38,7 @@ export const authReducer = createReducer(
     isAuthenticated: false,
     loading: false,
     error,
-    user: null,  // Si l'échec de connexion, effacer les données utilisateur
+    user: null,
   })),
-  on(AuthActions.logout, () => initialState)  // Réinitialise l'état à la déconnexion
+  on(AuthActions.logout, () => initialState)
 );
