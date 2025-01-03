@@ -1,6 +1,18 @@
 {
-  "products": [
+  "users": [{
+      "id": "1",
+      "email": "admin@example.com",
+      "password": "admin123",
+      "token": "abc123xyz"
+    },
     {
+      "id": "2",
+      "email": "user@example.com",
+      "password": "user123",
+      "token": "xyz456abc"
+    }
+  ],
+  "products": [{
       "id": "1",
       "name": "Laptop",
       "price": 999.99,

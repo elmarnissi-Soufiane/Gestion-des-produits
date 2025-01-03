@@ -1,0 +1,33 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <h1 class="login-title">Connexion</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Email</mat-label>
+        <mat-icon matPrefix>email</mat-icon>
+        <input matInput formControlName="email" placeholder="Entrez votre email" type="email" />
+        <mat-error *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+          L'email est requis et doit être valide.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Mot de passe</mat-label>
+        <mat-icon matPrefix>lock</mat-icon>
+        <input matInput formControlName="password" placeholder="Entrez votre mot de passe" type="password" />
+        <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+          Le mot de passe est requis.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Display error message from store -->
+      <mat-error *ngIf="error$ | async">
+        {{ error$ | async }}
+      </mat-error>
+
+      <button mat-raised-button color="primary" class="login-button" [disabled]="loginForm.invalid">
+        Connexion
+      </button>
+    </form>
+  </mat-card>
+</div>

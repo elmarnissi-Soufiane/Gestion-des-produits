@@ -1,16 +1,18 @@
-import { Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
-import { ProdcutsComponent } from './components/prodcuts/prodcuts.component';
-import { ContactComponent } from './components/contact/contact.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
-import { AddProdComponent } from './pages/add-prod/add-prod.component';
-import { EditProdComponent } from './pages/edit-prod/edit-prod.component';
+import { Routes } from "@angular/router";
+import { ContactComponent } from "./components/contact/contact.component";
+import { HomeComponent } from "./components/home/home.component";
+import { LoginComponent } from "./components/login/login.component";
+import { ProdcutsComponent } from "./components/prodcuts/prodcuts.component";
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full', // Obligatoire pour une redirection complète
+    redirectTo: 'login', // Redirige vers login par défaut
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
   },
   {
     path: 'home',
@@ -21,23 +23,11 @@ export const routes: Routes = [
     component: ProdcutsComponent,
   },
   {
-    path: 'newProduct',
-    component: AddProdComponent,
-  },
-  {
-    path: 'editProduct/:id',
-    component: EditProdComponent,
-  },
-  {
     path: 'contact',
     component: ContactComponent,
   },
   {
-    path: 'not-found',
-    component: NotFoundComponent,
-  },
-  {
     path: '**',
-    redirectTo: '/not-found',
+    redirectTo: '/not-found', // Par défaut, redirige vers login si la route est invalide
   },
 ];

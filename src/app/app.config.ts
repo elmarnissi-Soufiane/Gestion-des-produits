@@ -14,6 +14,8 @@ import { provideEffects } from '@ngrx/effects';
 import { productReducers } from './ngrx/reducers/products.reducers';
 import { ProdcutsEffects } from './ngrx/effects/products.effects';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { authReducer } from './ngrx/users/auth.reducer';
+import { AuthEffects } from './ngrx/users/auth.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -24,13 +26,14 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     provideStore({
       catalogueState: productReducers, // appel du fonction de reducers continet tous les actions qui on utiliser sur store pour recupere donnes
+      authState: authReducer, // Reducer pour l'authentification
     }),
-    provideEffects([ProdcutsEffects]), // en mettre la calass Injectable d'effect
+    provideEffects([ProdcutsEffects, AuthEffects]), // en mettre la calass Injectable d'effect
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),
       connectInZone: true,
-    }), provideAnimationsAsync(),
+    }), provideAnimationsAsync(), provideAnimationsAsync(),
   ],
 };
 
